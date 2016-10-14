@@ -1,21 +1,21 @@
 %% lasso experiment 
 clear variables; clf; 
-seed = 2;  rng(seed); 
+% seed = 2;  rng(seed); 
 % stimuli by voxel
 m = 256;        % num stimuli
 n = 512;        % num voxels
-X = randn(m,n);
-numNonZeroFeatures = 500; 
-
-% generate beta and y 
-beta.truth = generateBeta(numNonZeroFeatures, n, 1);
+numNonZeroFeatures = 100; 
 noise = randn(m,1);
+
+% generate X, beta and y 
+X = randn(m,n);
+beta.truth = generateBeta(numNonZeroFeatures, n, 1);
 y = X * beta.truth;
 
 %% iteratively fitting reweighted-lasso
 lambda = 1;
 % fit lasso
-beta.lasso = lasso_ista(X, y, lambda, ones(n,1), 0);
+beta.lasso = lasso_ista(X, y, lambda, false);
 % fit ridge
 [U,S,V] = svd(X, 'econ');
 beta.ridge = V * inv(S^2 + eye(size(S))*lambda) * S * U' * y;
