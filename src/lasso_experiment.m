@@ -5,7 +5,7 @@ seed = 2;  rng(seed);
 m = 256;        % num stimuli
 n = 512;        % num voxels
 X = randn(m,n);
-numNonZeroFeatures = 100; 
+numNonZeroFeatures = 500; 
 
 % generate beta and y 
 beta.truth = generateBeta(numNonZeroFeatures, n, 1);
