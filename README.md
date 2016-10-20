@@ -1,9 +1,15 @@
 # MVPA_tutorial
 MVPA tutorial - Rogers lab brain imaging unit  
 
-I am organizing the brain imaging unit at the <a href = "http://concepts.psych.wisc.edu/" > Knowledge and Concepts Lab</a>, directed by Professor Tim Rogers. This is a tutorial (in progress) that introduces people to MVPA methods. To tackle the <a href = "https://en.wikipedia.org/wiki/Underdetermined_system">underdeterminacy</a> of neuroimaging data without pre-defining ROIs, I will focus on sparse methods, such as Logistic LASSO. 
+I am organizing the brain imaging unit at the <a href = "http://concepts.psych.wisc.edu/" > Knowledge and Concepts Lab</a>, directed by Professor Tim Rogers. This is a tutorial (in progress) that introduces people to MVPA methods. 
 
-You can access the <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/0.-Schedule">meeting schedule</a> from the wiki page. 
+Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>. For example, a typical fMRI data might has 100,000 features (voxels) with only a few hunderds of training examples (stimuli presented). To tackle this issue of underdeterminacy while fitting the whole brain model (i.e. without pre-defining ROIs), we tend to use sparse methods, such as the Logistic LASSO, which will be the main focus of this tutorial.  
+
+
+### The Brain Imaging Unit - Meeting
+- You can access the <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/0.-Schedule">meeting schedule</a> from the wiki page. 
+
+- Where and when: Wednesday 4pm at Psych 634
 
 ### Tutorial Content 
 1. <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/1.-L1-vs.-L2-penalty">Understand L1 versus L2 penalty</a>
