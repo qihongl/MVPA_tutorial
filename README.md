@@ -12,7 +12,7 @@ Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/U
 - Where and when: Wednesday 4pm at Psych 634
 
 ### Tutorial Content 
-1. <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/1.-L1-vs.-L2-penalty">Understand L1 versus L2 penalty</a>
+1. <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/1.-L1-vs.-L2-penalty:--sparsity">Understand L1 versus L2 penalty</a>
 2. Logistic Lasso
 3. Iterative Logistic Lasso
 
