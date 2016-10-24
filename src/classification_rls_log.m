@@ -1,9 +1,9 @@
 %% classification with RLS linear prediction
-function [accuracy] = classification_rls_log(mn_ratio, showPicture)
+function [accuracy] = classification_rls_log(m, n, showPicture)
 % stimuli by voxel
-m = 500;                % num stimuli
-n = round(m * mn_ratio);        % num voxels
-testset_size = 100; 
+% n = 500;        % num voxels
+% m = mn_ratio;   % num stimuli
+testset_size = round(m * .2); 
 noise = randn(m,1);
 
 %% generate X, beta and y 
