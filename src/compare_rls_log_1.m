@@ -7,9 +7,9 @@ clear variables; clf;
 M = 100;
 N = 2;
 variance1 = .3;
-variance2 = .6;
+variance2 = .3;
 center1 = [4 2];
-center2 = [-3,-1];
+center2 = [-3,-1]; 
 
 X1 = variance1 * bsxfun(@plus, randn(M, N), center1);
 X2 = variance2 * bsxfun(@plus, randn(M, N), center2);
@@ -19,7 +19,8 @@ y = [ones(M, 1); -ones(M, 1)];
 
 %% Solve least square & logistic optimization 
 beta.ls = inv(X_aug' * X_aug) * X_aug' * y; 
-fit = cvglmnet(X,y, 'binomial');
+fit = cvglmnet(X, y, 'binomial');
+% fit = cvglmnet(X,y, 'gaussian');
 beta.log = cvglmnetCoef(fit,'lambda_min');
 
 %% Plot data points and boundary
