@@ -4,12 +4,12 @@ seed = 1;  rng(seed);
 % stimuli by voxel
 m = 256;        % num stimuli
 n = 512;        % num voxels
-numNonZeroFeatures = 512; 
+numNonZeroFeatures = 100; 
 noise = randn(m,1);
 
 % generate X, beta and y 
 X = randn(m,n);
-beta.truth = generateBeta(numNonZeroFeatures, n, 1);
+beta.truth = generateBeta(numNonZeroFeatures, n, 5, 'normal');
 probability = 1 ./ (1 + exp(-X * beta.truth));
 y = binornd(1,probability);
 
@@ -28,13 +28,9 @@ cvfit.ridge = cvglmnet(X,y, 'binomial', options);
 beta.ridge = cvglmnetCoef(cvfit.ridge, 'lambda_min');
 beta.ridge(1) = [];
 
-%% compute hits & false rate
-% hits: truth is nonzero & our esitimation is also nonzero
-% false: truth is nonzero & our esitimation is zero
-TP.lasso = sum((beta.truth ~= 0) & (beta.lasso ~= 0));
-FP.lasso = sum((beta.truth == 0) & (beta.lasso ~= 0));
-TP.ridge = sum((beta.truth ~= 0) & (beta.ridge ~= 0));
-FP.ridge = sum((beta.truth == 0) & (beta.ridge ~= 0));
+%% compute TP/FP
+[TP.lasso, FP.lasso] = computeTPFP(beta.truth, beta.lasso);
+[TP.ridge, FP.ridge] = computeTPFP(beta.truth, beta.ridge);
 
 %% compare solution with the truth 
 g.FS = 20; 
@@ -61,3 +57,10 @@ ylabel('Number of Nonzero Weights', 'fontsize', g.FS)
 xlabel('Methods', 'fontsize', g.FS)
 
 set(gca,'fontsize', g.FS - 4)
+
+%% unsupervised analysis 
+
+[U,S,V] = svd(X);
+
+figure(2)
+plot(diag(S))

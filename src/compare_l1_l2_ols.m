@@ -4,12 +4,12 @@ seed = 1;  rng(seed);
 % stimuli by voxel
 m = 256;        % num stimuli
 n = 512;        % num voxels
-numNonZeroFeatures = 512; 
+numNonZeroFeatures = 100; 
 noise = randn(m,1);
 
 % generate X, beta and y 
 X = randn(m,n);
-beta.truth = generateBeta(numNonZeroFeatures, n, 1);
+beta.truth = generateBeta(numNonZeroFeatures, n, 1, 'normal');
 y = X * beta.truth;
 
 %% fitting least square model with L1 & L2 regularizer
@@ -23,13 +23,9 @@ beta.ridge = V * inv(S^2 + eye(size(S))*lambda) * S * U' * y;
 % % fit regular least square 
 % beta.normal = inv(X' * X) * X' * y; 
 
-%% compute hits & false rate
-% hits: truth is nonzero & our esitimation is also nonzero
-% false: truth is nonzero & our esitimation is zero
-hits.lasso = sum((beta.truth ~= 0) & (beta.lasso ~= 0));
-false.lasso = sum((beta.truth == 0) & (beta.lasso ~= 0));
-hits.ridge = sum((beta.truth ~= 0) & (beta.ridge ~= 0));
-false.ridge = sum((beta.truth == 0) & (beta.ridge ~= 0));
+%% compute TP/FP
+[TP.lasso, FP.lasso] = computeTPFP(beta.truth, beta.lasso);
+[TP.ridge, FP.ridge] = computeTPFP(beta.truth, beta.ridge);
 
 %% compare solution with the truth 
 g.FS = 20; 
@@ -45,7 +41,7 @@ compareBeta(beta.ridge, beta.truth,'Ridge estimates','True beta', g, true)
 
 subplot(133)
 mybar = bar([1,2,3], ...
-    [nnz(beta.truth), 0; hits.lasso, false.lasso; hits.ridge, false.ridge], 'stacked');
+    [nnz(beta.truth), 0; TP.lasso, FP.lasso; TP.ridge, FP.ridge], 'stacked');
 legend(mybar, {'True positive','False positive'}, 'Location','NW');
 set(gca,'XTickLabel',{'truth','lasso', 'ridge'})
 
