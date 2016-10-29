@@ -4,7 +4,7 @@ seed = 1;  rng(seed);
 % stimuli by voxel
 m = 256;        % num stimuli
 n = 512;        % num voxels
-numNonZeroFeatures = 100; 
+numNonZeroFeatures = 512; 
 noise = randn(m,1);
 
 % generate X, beta and y 
@@ -12,15 +12,24 @@ X = randn(m,n);
 beta.truth = generateBeta(numNonZeroFeatures, n, 1);
 y = X * beta.truth;
 
-%% iteratively fitting reweighted-lasso
+%% fitting least square model with L1 & L2 regularizer
 lambda = 1;
 % fit lasso
 beta.lasso = lasso_ista(X, y, lambda, false);
 % fit ridge
 [U,S,V] = svd(X, 'econ');
 beta.ridge = V * inv(S^2 + eye(size(S))*lambda) * S * U' * y;
+
 % % fit regular least square 
 % beta.normal = inv(X' * X) * X' * y; 
+
+%% compute hits & false rate
+% hits: truth is nonzero & our esitimation is also nonzero
+% false: truth is nonzero & our esitimation is zero
+hits.lasso = sum((beta.truth ~= 0) & (beta.lasso ~= 0));
+false.lasso = sum((beta.truth == 0) & (beta.lasso ~= 0));
+hits.ridge = sum((beta.truth ~= 0) & (beta.ridge ~= 0));
+false.ridge = sum((beta.truth == 0) & (beta.ridge ~= 0));
 
 %% compare solution with the truth 
 g.FS = 20; 
@@ -28,16 +37,18 @@ g.LW = 2;
 figure(1)
 
 subplot(131)
-compareBeta(beta.lasso, beta.truth,'Lasso esimates','True beta', g)
+compareBeta(beta.lasso, beta.truth,'Lasso esimates','True beta', g, true)
 subplot(132)
-compareBeta(beta.ridge, beta.truth,'Ridge estimates','True beta', g)
-% subplot(313)
+compareBeta(beta.ridge, beta.truth,'Ridge estimates','True beta', g, true)
+% subplot(133)
 % compareBeta(beta.normal,beta.truth,'regular LS esimates','Truth', g)
-subplot(133)
 
-% bar([1,2,3,4],[nnz(beta.truth), nnz(beta.lasso), nnz(beta.ridge), nnz(beta.normal)])
-bar([1,2,3],[nnz(beta.truth), nnz(beta.lasso), nnz(beta.ridge)])
-set(gca,'XTickLabel',{'truth','lasso', 'ridge'}, 'fontsize', g.FS - 4)
+subplot(133)
+mybar = bar([1,2,3], ...
+    [nnz(beta.truth), 0; hits.lasso, false.lasso; hits.ridge, false.ridge], 'stacked');
+legend(mybar, {'True positive','False positive'}, 'Location','NW');
+set(gca,'XTickLabel',{'truth','lasso', 'ridge'})
+
 hold on 
 plot([0 4],[nnz(beta.truth) nnz(beta.truth)], 'k--')
 hold off 
@@ -45,3 +56,4 @@ ylim([0 n])
 xlim([0 4])
 ylabel('Number of Nonzero Weights', 'fontsize', g.FS)
 xlabel('Methods', 'fontsize', g.FS)
+set(gca,'fontsize', g.FS - 4)
