@@ -6,16 +6,22 @@ clear variables; clf;
 % Parameters for creatinga the two clusters 
 M = 100;
 N = 2;
-variance1 = .3;
-variance2 = .3;
+
+variance1 = .2;
+variance2 = .5;
 center1 = [4 2];
 center2 = [-3,-1]; 
+center3 = [-6,-2]; 
+
 
 X1 = variance1 * bsxfun(@plus, randn(M, N), center1);
 X2 = variance2 * bsxfun(@plus, randn(M, N), center2);
+% X3 = variance2 * bsxfun(@plus, randn(M, N), center3);
+
 X = [X1; X2];  
 X_aug = [ones(2*M, 1) X];    % add intercept term
 y = [ones(M, 1); -ones(M, 1)];
+% y = [ones(M, 1); -ones(M, 1); ones(M,1)];
 
 %% Solve least square & logistic optimization 
 beta.ls = inv(X_aug' * X_aug) * X_aug' * y; 
@@ -38,6 +44,6 @@ plot(x, boundary.ls, 'r', 'linewidth', 2);
 plot(x, boundary.log, 'g', 'linewidth', 2);
 legend({'Class 0','Class 1', 'OLS Boundary', 'Logistic boundary'}, 'location', 'SE')
 title('Compare least square loss and logistic loss')
-xlabel('x_1')
-ylabel('x_2')
+xlabel('X_1')
+ylabel('X_2')
 set(gca,'fontsize', 16)

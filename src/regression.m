@@ -10,7 +10,9 @@ y = MPG;
 X = [ones(size(x1)) x1 x2 x1.*x2];
 b = regress(y,X);    % Removes NaN data
 
-%% 
+
+
+%% plot 
 scatter3(x1,x2,y,'filled')
 hold on
 x1fit = min(x1):100:max(x1);
