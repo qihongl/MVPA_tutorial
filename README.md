@@ -12,7 +12,8 @@ Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/U
 - Where and when: Wednesday 4pm at Psych 634
 
 ### Tutorial Content 
-1. <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/1.-L1-vs.-L2-penalty:--sparsity">Understand L1 versus L2 penalty</a>
-2. <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/2.-Logistic-Regression">Logistic Regression</a>
-3. Iterative Lasso
-4. Readings
+- <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/1.-Sparsity:-OLS-with-L1-vs.-L2">Compare L1 & L2 penalty: Linear Regression</a>
+- <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/2.-Logistic-Regression">Logistic Regression</a>
+- <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/3.-Sparsity:-Logistic-Lasso">Compare L1 & L2 penalty: Logistic Regression</a>
+- Iterative Lasso
+- Readings
