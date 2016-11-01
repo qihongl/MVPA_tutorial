@@ -1,5 +1,5 @@
 # MVPA_tutorial
-MVPA tutorial - Rogers lab brain imaging unit  
+MVPA tutorial - Rogers lab brain imaging unit [<a href = "https://github.com/QihongL/MVPA_tutorial/wiki">Wiki page]
 
 I am organizing the brain imaging unit at the <a href = "http://concepts.psych.wisc.edu/" > Knowledge and Concepts Lab</a>, directed by Professor <a href = "http://concepts.psych.wisc.edu/index.php/tim-rogers/">Tim Rogers</a>. This is a tutorial (in progress) that introduces people to MVPA methods. 
 
