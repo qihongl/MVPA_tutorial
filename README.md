@@ -16,4 +16,5 @@ Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/U
 - <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/2.-Logistic-Regression">Logistic Regression</a>
 - <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/3.-Sparsity:-Logistic-Lasso">Compare L1 & L2 penalty: Logistic Regression</a>
 - Iterative Lasso
+- Group Lasso, SOS Lasso
 - Readings
