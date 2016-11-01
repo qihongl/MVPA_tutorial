@@ -18,3 +18,13 @@ Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/U
 - Iterative Lasso
 - Group Lasso, SOS Lasso
 - Readings
+
+
+
+### Dependencies
+- Matlab 
+- <a href = "http://web.stanford.edu/~hastie/glmnet_matlab/">Glmnet</a>: A Matlab toolbox for fitting the elastic-net for linear regression, logistic and multinomial regression, Poisson regression and the Cox model.
+
+### Reference: 
+- Glmnet for Matlab (2013) Qian, J., Hastie, T., Friedman, J., Tibshirani, R. and Simon, N.
+http://www.stanford.edu/~hastie/glmnet_matlab/
