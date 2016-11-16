@@ -6,8 +6,8 @@ I am organizing the brain imaging unit at the <a href = "http://concepts.psych.w
 Neuroimaging data analysis is usually <a href = "https://en.wikipedia.org/wiki/Underdetermined_system">underdetermined</a>. For example, a typical fMRI data might has 100,000 features (voxels) with only a few hunderds of training examples (stimuli presented). To tackle this issue of underdeterminacy while fitting the whole brain model (i.e. without pre-defining ROIs), we tend to use sparse methods, such as the Logistic LASSO, which will be the main focus of this tutorial.  
 
 
-### The Brain Imaging Unit - Meeting
-- You can access the <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/0.-Schedule">meeting schedule</a> from the wiki page. 
+### The MVPA workshop
+- You can access the <a href = "https://github.com/QihongL/MVPA_tutorial/wiki/0.-Schedule">workshop schedule</a> from the wiki page. 
 
 - Where and when: Wednesday 4pm at Psych 634
 
