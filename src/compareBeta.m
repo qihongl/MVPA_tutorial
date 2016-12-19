@@ -2,7 +2,7 @@ function [] = compareBeta(beta_x, beta_y, label_x, label_y, g, scaleAxis)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 plot(beta_x, beta_y, 'o','linewidth', g.LW)
-
+title('Feature weight reconstruction')
 xlabel(label_x, 'fontsize', g.FS)
 ylabel(label_y, 'fontsize', g.FS)
 set(gca,'fontsize', g.FS - 4)

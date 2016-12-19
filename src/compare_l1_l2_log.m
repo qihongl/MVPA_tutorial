@@ -69,6 +69,7 @@ plot([0 4],[nnz(beta.truth) nnz(beta.truth)], 'k--')
 hold off 
 ylim([0 n])
 xlim([0 4])
+title('Feature selection')
 ylabel('Number of Nonzero Weights', 'fontsize', g.FS)
 xlabel('Methods', 'fontsize', g.FS)
 set(gca,'fontsize', g.FS - 4)
