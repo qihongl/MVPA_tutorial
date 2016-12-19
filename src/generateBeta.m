@@ -13,7 +13,7 @@ beta = zeros(M,1);
 
 % set a subset of them to be randn
 if strcmp(distribution, 'normal')
-    beta(index) = randn(size(index))*magnitude;
+    beta(index) = randn(size(index)) + magnitude;
 elseif strcmp(distribution, 'discrete')
     beta(index) = randi(magnitude, size(index));
 else

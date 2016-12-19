@@ -4,12 +4,12 @@ seed = 1;  rng(seed);
 % stimuli by voxel
 m = 256;        % num stimuli
 n = 512;        % num voxels
-numNonZeroFeatures = 100; 
+numNonZeroFeatures = 512; 
 noise = randn(m,1);
 
 % generate X, beta and y 
 X = randn(m,n);
-beta.truth = generateBeta(numNonZeroFeatures, n, 1, 'normal');
+beta.truth = generateBeta(numNonZeroFeatures, n, 0, 'normal');
 y = X * beta.truth;
 
 %% fitting least square model with L1 & L2 regularizer
@@ -20,8 +20,8 @@ beta.lasso = lasso_ista(X, y, lambda, false);
 [U,S,V] = svd(X, 'econ');
 beta.ridge = V * inv(S^2 + eye(size(S))*lambda) * S * U' * y;
 
-% % fit regular least square 
-% beta.normal = inv(X' * X) * X' * y; 
+% fit regular least square 
+beta.normal = inv(X' * X) * X' * y; 
 
 %% compute TP/FP
 [TP.lasso, FP.lasso] = computeTPFP(beta.truth, beta.lasso);
@@ -36,9 +36,6 @@ subplot(131)
 compareBeta(beta.lasso, beta.truth,'Lasso esimates','True beta', g, true)
 subplot(132)
 compareBeta(beta.ridge, beta.truth,'Ridge estimates','True beta', g, true)
-% subplot(133)
-% compareBeta(beta.normal,beta.truth,'regular LS esimates','Truth', g)
-
 subplot(133)
 mybar = bar([1,2,3], ...
     [nnz(beta.truth), 0; TP.lasso, FP.lasso; TP.ridge, FP.ridge], 'stacked');
@@ -53,3 +50,8 @@ xlim([0 4])
 ylabel('Number of Nonzero Weights', 'fontsize', g.FS)
 xlabel('Methods', 'fontsize', g.FS)
 set(gca,'fontsize', g.FS - 4)
+
+%% 
+figure(2)
+compareBeta(beta.normal,beta.truth,'regular LS esimates','Truth', g, false)
+
