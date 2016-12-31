@@ -2,9 +2,9 @@
 clear variables; clf; 
 seed = 1;  rng(seed); 
 % stimuli by voxel
-m = 1000;        % num stimuli
+m = 500;        % num stimuli
 n = 500;        % num voxels
-numNonZeroFeatures = 100; 
+numNonZeroFeatures = 50; 
 % noise = randn(m,1);
 
 %% generate X, beta, then y <- X * beta + noise 
@@ -14,6 +14,7 @@ probability = sigmoid(X * beta.truth);
 y = binornd(1,probability);
 
 %% separate the training set and the test set 
+% hold out half of the data 
 testset_idx = false(m,1); 
 testset_idx(1 : (m / 2 )) = true; 
 X_train = X(~testset_idx,:);
