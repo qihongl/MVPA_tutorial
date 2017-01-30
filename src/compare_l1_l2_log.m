@@ -1,8 +1,9 @@
 %% lasso experiment 
 clear variables; clf; 
-seed = 1;  rng(seed); 
+seed = 1;  
+rng(seed); 
 % stimuli by voxel
-m = 500;        % num stimuli
+m = 300;        % num stimuli
 n = 500;        % num voxels
 numNonZeroFeatures = 50; 
 % noise = randn(m,1);
@@ -21,6 +22,7 @@ X_train = X(~testset_idx,:);
 y_train = y(~testset_idx); 
 X_test = X(testset_idx,:);
 y_test = y(testset_idx);
+% [X_train, X_test] = columnNormalization(X_train, X_test);
 
 %% fitting logistic regression with L1 & L2 regularizer
 options.nlambda = 100; 
