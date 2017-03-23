@@ -29,6 +29,8 @@ fit = cvglmnet(X, y, 'binomial');
 % fit = cvglmnet(X,y, 'gaussian');
 beta.log = cvglmnetCoef(fit,'lambda_min');
 
+svmStruct = svmtrain(X, y,'ShowPlot',true);
+
 %% Plot data points and boundary
 % compute the boundaries
 bound = 3; 
@@ -37,12 +39,12 @@ boundary.ls = -beta.ls(1)/beta.ls(3) - (beta.ls(2)/beta.ls(3))*x;
 boundary.log = -beta.log(1)/beta.log(3) - (beta.log(2)/beta.log(3))*x;
 % plot 
 hold on;
-plot(X1(:, 1), X1(:, 2), 'kx', 'linewidth', 2); 
-plot(X2(:, 1), X2(:, 2), 'ko', 'linewidth', 2); 
-xlim([-bound bound]); ylim([-bound bound]);
+% plot(X1(:, 1), X1(:, 2), 'kx', 'linewidth', 2); 
+% plot(X2(:, 1), X2(:, 2), 'ko', 'linewidth', 2); 
+xlim([-bound bound]); ylim([(min(X(:,2))-.25) max(X(:,2))+.25]);
 plot(x, boundary.ls, 'r', 'linewidth', 2);
 plot(x, boundary.log, 'g', 'linewidth', 2);
-legend({'Class 0','Class 1', 'OLS Boundary', 'Logistic boundary'}, 'location', 'SE')
+legend({'Class 0','Class 1', 'SVs','SVM','OLS','LOG'}, 'location', 'SE')
 title('Compare least square loss and logistic loss')
 xlabel('X_1')
 ylabel('X_2')

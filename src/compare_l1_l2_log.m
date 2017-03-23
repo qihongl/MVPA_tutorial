@@ -1,9 +1,9 @@
 %% lasso experiment 
 clear variables; clf; 
-seed = 1;  
-rng(seed); 
+% seed = 1;  
+% rng(seed); 
 % stimuli by voxel
-m = 300;        % num stimuli
+m = 500;        % num stimuli
 n = 500;        % num voxels
 numNonZeroFeatures = 50; 
 % noise = randn(m,1);
@@ -39,6 +39,10 @@ cvfit.ridge = cvglmnet(X_train,y_train, 'binomial', options);
 beta.ridge = cvglmnetCoef(cvfit.ridge, 'lambda_min');
 beta.ridge(1) = [];
 
+% fit SVM 
+svmStruct = svmtrain(X_train, y_train);
+pred.svm = svmclassify(svmStruct,X_test); 
+
 %% compute TP/FP 
 % w.r.t beta 
 [TP.beta.lasso, FP.beta.lasso] = computeTPFP(beta.truth, beta.lasso);
@@ -50,6 +54,7 @@ pred.ridge = sigmoid(X_test * beta.ridge);
 % compute the classification accuracy
 accuracy.lasso = sum(round(pred.lasso) == y_test) / length(y_test); 
 accuracy.ridge = sum(round(pred.ridge) == y_test) / length(y_test); 
+accuracy.svm = sum(round(pred.svm) == y_test) / length(y_test); 
 
 %% compare solution with the truth 
 g.FS = 20; 
